@@ -13,7 +13,13 @@
     "type": "git",
     "url": "git+https://github.com/hrutik-codes/nxt-trendz-fullstack.git"
   },
-  "keywords": ["mern", "ecommerce", "react", "nodejs", "mongodb"],
+  "keywords": [
+    "mern",
+    "ecommerce",
+    "react",
+    "nodejs",
+    "mongodb"
+  ],
   "author": "hrutik-codes",
   "license": "ISC",
   "bugs": {
@@ -21,6 +27,16 @@
   },
   "homepage": "https://github.com/hrutik-codes/nxt-trendz-fullstack#readme",
   "dependencies": {
-    "concurrently": "^9.2.1"
+    "bcryptjs": "^3.0.3",
+    "concurrently": "^9.2.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.2.4",
+    "razorpay": "^2.9.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
