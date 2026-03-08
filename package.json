@@ -1,0 +1,26 @@
+{
+  "name": "nxt-trendz-fullstack",
+  "version": "1.0.0",
+  "description": "🛒 Full-stack e-commerce platform built with MERN stack featuring JWT authentication, product filtering, cart & order management, Razorpay payment gateway, and admin dashboard.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "client": "cd client && npm run dev",
+    "server": "nodemon server/server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrutik-codes/nxt-trendz-fullstack.git"
+  },
+  "keywords": ["mern", "ecommerce", "react", "nodejs", "mongodb"],
+  "author": "hrutik-codes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hrutik-codes/nxt-trendz-fullstack/issues"
+  },
+  "homepage": "https://github.com/hrutik-codes/nxt-trendz-fullstack#readme",
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
