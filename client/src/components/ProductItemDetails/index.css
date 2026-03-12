@@ -17,7 +17,7 @@
 
 @media screen and (min-width: 768px) {
   .product-details-success-view {
-    width: 80%;
+    width: 90%;
     max-width: 1110px;
   }
 }
@@ -31,33 +31,43 @@
   .product-details-container {
     flex-direction: row;
     justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: 48px;
+    gap: 40px;
   }
 }
 
 .product-image {
   border-radius: 16px;
   flex-shrink: 0;
+  width: 100%;
+  object-fit: contain;
+  background-color: #f8f8f8;
+  padding: 20px;
 }
 
 @media screen and (min-width: 768px) {
   .product-image {
-    width: 48%;
-    max-width: 540px;
-    max-height: 576px;
+    width: 40%;
+    max-width: 380px;
+    max-height: 420px;
+    object-fit: contain;
+    background-color: #f8f8f8;
+    border-radius: 16px;
+    padding: 20px;
   }
 }
 
 @media screen and (min-width: 768px) {
   .product {
-    width: 48%;
+    width: 55%;
   }
 }
 
 .product-name {
   color: #3e4c59;
   font-family: 'Roboto';
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 500;
   margin-top: 24px;
   margin-bottom: 16px;
@@ -65,7 +75,7 @@
 
 @media screen and (min-width: 768px) {
   .product-name {
-    font-size: 48px;
+    font-size: 28px;
     margin-top: 0px;
   }
 }
@@ -73,7 +83,7 @@
 .price-details {
   color: #171f46;
   font-family: 'Roboto';
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   margin-bottom: 16px;
 }
@@ -96,12 +106,12 @@
   font-size: 14px;
   margin-top: 16px;
   margin-bottom: 16px;
-  line-height: 1.3;
+  line-height: 1.6;
 }
 
 @media screen and (min-width: 768px) {
   .product-description {
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 24px;
   }
 }
@@ -149,6 +159,8 @@
 .quantity-container {
   display: flex;
   align-items: center;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .quantity-controller-button {
@@ -210,33 +222,31 @@
 .similar-products-heading {
   color: #3e4c59;
   font-family: 'Roboto';
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 500;
   margin: 0;
+  margin-bottom: 24px;
 }
 
 @media screen and (min-width: 768px) {
   .similar-products-heading {
-    font-size: 32px;
+    font-size: 28px;
   }
 }
 
 .similar-products-list {
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
   padding-left: 0;
-}
-
-@media screen and (min-width: 768px) {
-  .similar-products-list {
-    margin-top: 24px;
-  }
+  gap: 20px;
+  margin-top: 8px;
+  margin-bottom: 48px;
 }
 
 @media screen and (min-width: 768px) {
   .similar-products-list {
     flex-direction: row;
+    margin-top: 24px;
   }
 }
 

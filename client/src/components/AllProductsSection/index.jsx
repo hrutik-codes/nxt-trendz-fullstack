@@ -90,38 +90,72 @@ class AllProductsSection extends Component {
     this.setState({
       apiStatus: apiStatusConstants.inProgress,
     })
-    const jwtToken = Cookies.get('jwt_token')
+
     const {activeOptionId, activeCategoryId, searchInput, activeRatingId} =
       this.state
-    const apiUrl = `https://apis.ccbp.in/products?sort_by=${activeOptionId}&category=${activeCategoryId}&title_search=${searchInput}&rating=${activeRatingId}`
-    const options = {
-      headers: {
-        Authorization: `Bearer ${jwtToken}`,
-      },
-      method: 'GET',
-    }
-    const response = await fetch(apiUrl, options)
-    if (response.ok) {
+
+    try {
+      // Fetch from FakeStore API
+      let url = 'https://fakestoreapi.com/products'
+
+      // Category filter
+      if (activeCategoryId === '1') {
+        url = "https://fakestoreapi.com/products/category/women's clothing"
+      } else if (activeCategoryId === '2') {
+        url = 'https://fakestoreapi.com/products/category/electronics'
+      } else if (activeCategoryId === '3') {
+        url = "https://fakestoreapi.com/products/category/men's clothing"
+      } else if (activeCategoryId === '4') {
+        url = 'https://fakestoreapi.com/products/category/jewelery'
+      }
+
+      const response = await fetch(url)
       const fetchedData = await response.json()
-      const updatedData = fetchedData.products.map(product => ({
+
+      // Map FakeStore data to your existing product structure
+      let updatedData = fetchedData.map(product => ({
         title: product.title,
-        brand: product.brand,
+        brand: 'NxtTrendz',
         price: product.price,
         id: product.id,
-        imageUrl: product.image_url,
-        rating: product.rating,
+        imageUrl: product.image,
+        rating: product.rating.rate,
       }))
+
+      // Search filter
+      if (searchInput) {
+        updatedData = updatedData.filter(product =>
+          product.title.toLowerCase().includes(searchInput.toLowerCase())
+        )
+      }
+
+      // Rating filter
+      if (activeRatingId) {
+        updatedData = updatedData.filter(
+          product => Math.floor(product.rating) >= parseInt(activeRatingId)
+        )
+      }
+
+      // Sort
+      if (activeOptionId === 'PRICE_HIGH') {
+        updatedData.sort((a, b) => b.price - a.price)
+      } else if (activeOptionId === 'PRICE_LOW') {
+        updatedData.sort((a, b) => a.price - b.price)
+      }
+
       this.setState({
         productsList: updatedData,
         apiStatus: apiStatusConstants.success,
       })
-    } else {
+
+    } catch (err) {
+      console.error('Products fetch error:', err.message)
       this.setState({
         apiStatus: apiStatusConstants.failure,
       })
     }
   }
-
+  
   renderLoadingView = () => (
     <div className="products-loader-container">
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />

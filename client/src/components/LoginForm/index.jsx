@@ -1,31 +1,28 @@
 import {Component} from 'react'
+import {Redirect, Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
-import {Redirect} from 'react-router-dom'
-
+import {setToken} from '../../utils/api'
 import './index.css'
 
 class LoginForm extends Component {
   state = {
-    username: '',
+    email: '',
     password: '',
     showSubmitError: false,
     errorMsg: '',
   }
 
-  onChangeUsername = event => {
-    this.setState({username: event.target.value})
+  onChangeEmail = event => {
+    this.setState({email: event.target.value})
   }
 
   onChangePassword = event => {
     this.setState({password: event.target.value})
   }
 
-  onSubmitSuccess = jwtToken => {
+  onSubmitSuccess = token => {
     const {history} = this.props
-
-    Cookies.set('jwt_token', jwtToken, {
-      expires: 30,
-    })
+    setToken(token)
     history.replace('/')
   }
 
@@ -35,25 +32,26 @@ class LoginForm extends Component {
 
   submitForm = async event => {
     event.preventDefault()
-    const {username, password} = this.state
-    const userDetails = {username, password}
-    const url = 'https://apis.ccbp.in/login'
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(userDetails),
-    }
-    const response = await fetch(url, options)
-    const data = await response.json()
-    if (response.ok === true) {
-      this.onSubmitSuccess(data.jwt_token)
-    } else {
-      this.onSubmitFailure(data.error_msg)
+    const {email, password} = this.state
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({email, password})
+      })
+      const data = await response.json()
+      if (response.ok) {
+        this.onSubmitSuccess(data.token)
+      } else {
+        this.onSubmitFailure(data.message)
+      }
+    } catch (err) {
+      this.onSubmitFailure(err.message || 'Something went wrong. Please try again.')
     }
   }
 
   renderPasswordField = () => {
     const {password} = this.state
-
     return (
       <>
         <label className="input-label" htmlFor="password">
@@ -71,21 +69,20 @@ class LoginForm extends Component {
     )
   }
 
-  renderUsernameField = () => {
-    const {username} = this.state
-
+  renderEmailField = () => {
+    const {email} = this.state
     return (
       <>
-        <label className="input-label" htmlFor="username">
-          USERNAME
+        <label className="input-label" htmlFor="email">
+          EMAIL
         </label>
         <input
-          type="text"
-          id="username"
+          type="email"
+          id="email"
           className="username-input-field"
-          value={username}
-          onChange={this.onChangeUsername}
-          placeholder="Username"
+          value={email}
+          onChange={this.onChangeEmail}
+          placeholder="Email"
         />
       </>
     )
@@ -117,12 +114,16 @@ class LoginForm extends Component {
             className="login-website-logo-desktop-img"
             alt="website logo"
           />
-          <div className="input-container">{this.renderUsernameField()}</div>
+          <div className="input-container">{this.renderEmailField()}</div>
           <div className="input-container">{this.renderPasswordField()}</div>
           <button type="submit" className="login-button">
             Login
           </button>
           {showSubmitError && <p className="error-message">*{errorMsg}</p>}
+          <p className="register-link-text">
+            Don't have an account?{' '}
+            <Link to="/register" className="register-link">Register</Link>
+          </p>
         </form>
       </div>
     )

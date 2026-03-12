@@ -31,15 +31,15 @@ class ProductItemDetails extends Component {
   }
 
   getFormattedData = data => ({
-    availability: data.availability,
-    brand: data.brand,
+    availability: data.stock > 0 ? 'In Stock' : 'Out of Stock',
+    brand: 'NxtTrendz',
     description: data.description,
     id: data.id,
-    imageUrl: data.image_url,
+    imageUrl: data.image,
     price: data.price,
-    rating: data.rating,
+    rating: data.rating.rate,
     title: data.title,
-    totalReviews: data.total_reviews,
+    totalReviews: data.rating.count,
   })
 
   getProductData = async () => {
@@ -47,34 +47,35 @@ class ProductItemDetails extends Component {
     const {params} = match
     const {id} = params
 
-    this.setState({
-      apiStatus: apiStatusConstants.inProgress,
-    })
-    const jwtToken = Cookies.get('jwt_token')
-    const apiUrl = `https://apis.ccbp.in/products/${id}`
-    const options = {
-      headers: {
-        Authorization: `Bearer ${jwtToken}`,
-      },
-      method: 'GET',
-    }
-    const response = await fetch(apiUrl, options)
-    if (response.ok) {
+    this.setState({ apiStatus: apiStatusConstants.inProgress })
+
+    try {
+      // Fetch main product
+      const response = await fetch(`https://fakestoreapi.com/products/${id}`)
       const fetchedData = await response.json()
       const updatedData = this.getFormattedData(fetchedData)
-      const updatedSimilarProductsData = fetchedData.similar_products.map(
-        eachSimilarProduct => this.getFormattedData(eachSimilarProduct),
+
+      // Fetch similar products from same category
+      const similarResponse = await fetch(
+        `https://fakestoreapi.com/products/category/${fetchedData.category}`
       )
+      const similarData = await similarResponse.json()
+
+      // Exclude current product from similar products
+      const updatedSimilarProductsData = similarData
+        .filter(product => product.id !== fetchedData.id)
+        .slice(0, 4)
+        .map(product => this.getFormattedData(product))
+
       this.setState({
         productData: updatedData,
         similarProductsData: updatedSimilarProductsData,
         apiStatus: apiStatusConstants.success,
       })
-    }
-    if (response.status === 404) {
-      this.setState({
-        apiStatus: apiStatusConstants.failure,
-      })
+
+    } catch (err) {
+      console.error('Product details error:', err.message)
+      this.setState({ apiStatus: apiStatusConstants.failure })
     }
   }
 

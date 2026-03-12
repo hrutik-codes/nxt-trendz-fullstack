@@ -24,39 +24,30 @@ class PrimeDealsSection extends Component {
   }
 
   getPrimeDeals = async () => {
-    this.setState({
-      apiStatus: apiStatusConstants.inProgress,
-    })
+    this.setState({ apiStatus: apiStatusConstants.inProgress })
 
-    const jwtToken = Cookies.get('jwt_token')
-
-    const apiUrl = 'https://apis.ccbp.in/prime-deals'
-    const options = {
-      headers: {
-        Authorization: `Bearer ${jwtToken}`,
-      },
-      method: 'GET',
-    }
-    const response = await fetch(apiUrl, options)
-    if (response.ok === true) {
+    try {
+      const response = await fetch(
+        'https://fakestoreapi.com/products/category/electronics'
+      )
       const fetchedData = await response.json()
-      const updatedData = fetchedData.prime_deals.map(product => ({
+
+      const updatedData = fetchedData.slice(0, 4).map(product => ({
         title: product.title,
-        brand: product.brand,
+        brand: 'NxtTrendz',
         price: product.price,
         id: product.id,
-        imageUrl: product.image_url,
-        rating: product.rating,
+        imageUrl: product.image,
+        rating: product.rating.rate,
       }))
+
       this.setState({
         primeDeals: updatedData,
         apiStatus: apiStatusConstants.success,
       })
-    }
-    if (response.status === 401) {
-      this.setState({
-        apiStatus: apiStatusConstants.failure,
-      })
+    } catch (err) {
+      console.error('Prime deals error:', err.message)
+      this.setState({ apiStatus: apiStatusConstants.failure })
     }
   }
 
