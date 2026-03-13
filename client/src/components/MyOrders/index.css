@@ -1,0 +1,180 @@
+.my-orders-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.my-orders-heading {
+  color: #1f3864;
+  font-family: 'Roboto';
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 32px;
+}
+
+.orders-loading {
+  text-align: center;
+  color: #64748b;
+  font-family: 'Roboto';
+  font-size: 16px;
+  padding: 48px 0;
+}
+
+.orders-error {
+  color: #ef4444;
+  font-family: 'Roboto';
+  font-size: 16px;
+  text-align: center;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.order-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 20px;
+  background-color: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.order-id {
+  font-family: 'Roboto';
+  font-size: 14px;
+  color: #64748b;
+  margin: 0 0 4px 0;
+}
+
+.order-id span {
+  font-family: 'Courier New';
+  font-weight: 700;
+  color: #1f3864;
+}
+
+.order-date {
+  font-family: 'Roboto';
+  font-size: 13px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.order-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.order-status-badge,
+.order-payment-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  font-family: 'Roboto';
+}
+
+.status-processing { background-color: #dbeafe; color: #1e40af; }
+.status-shipped { background-color: #e0f2fe; color: #0369a1; }
+.status-delivered { background-color: #dcfce7; color: #166534; }
+.status-cancelled { background-color: #fee2e2; color: #991b1b; }
+.payment-paid { background-color: #dcfce7; color: #166534; }
+.payment-pending { background-color: #fef9c3; color: #854d0e; }
+
+.order-items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.order-item-img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  padding: 6px;
+  flex-shrink: 0;
+}
+
+.order-item-info {
+  flex: 1;
+}
+
+.order-item-title {
+  font-family: 'Roboto';
+  font-size: 14px;
+  color: #1e293b;
+  margin: 0 0 6px 0;
+  font-weight: 500;
+}
+
+.order-item-meta {
+  font-family: 'Roboto';
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+}
+
+.order-card-footer {
+  padding: 14px 20px;
+  background-color: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  text-align: right;
+}
+
+.order-total {
+  font-family: 'Roboto';
+  font-size: 16px;
+  color: #1e293b;
+  margin: 0;
+}
+
+.no-orders-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 64px 0;
+}
+
+.no-orders-img {
+  width: 300px;
+  margin-bottom: 24px;
+}
+
+.no-orders-heading {
+  font-family: 'Roboto';
+  font-size: 24px;
+  color: #1f3864;
+  margin-bottom: 8px;
+}
+
+.no-orders-desc {
+  font-family: 'Roboto';
+  font-size: 16px;
+  color: #64748b;
+}

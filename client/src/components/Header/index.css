@@ -179,3 +179,7 @@
     background-color: #e6f6ff;
   }
 }
+.admin-nav-link {
+  color: #0967d2;
+  font-weight: 600;
+}

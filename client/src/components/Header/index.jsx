@@ -1,8 +1,6 @@
 import {Link, withRouter} from 'react-router-dom'
 import Cookies from 'js-cookie'
-
 import CartContext from '../../context/CartContext'
-
 import './index.css'
 
 const Header = props => {
@@ -13,12 +11,22 @@ const Header = props => {
     window.location.reload()
   }
 
+  const isAdmin = () => {
+    try {
+      const token = Cookies.get('jwt_token')
+      const payload = JSON.parse(atob(token.split('.')[1]))
+      return payload.isAdmin
+    } catch (e) {
+      console.error(e.message)
+      return false
+    }
+  }
+
   const renderCartItemsCount = () => (
     <CartContext.Consumer>
       {value => {
         const {cartList} = value
         const cartItemsCount = cartList.length
-
         return (
           <>
             {cartItemsCount > 0 ? (
@@ -41,7 +49,6 @@ const Header = props => {
               alt="website logo"
             />
           </Link>
-
           <button
             type="button"
             className="nav-mobile-btn"
@@ -65,23 +72,27 @@ const Header = props => {
           </Link>
           <ul className="nav-menu">
             <li className="nav-menu-item">
-              <Link to="/" className="nav-link">
-                Home
-              </Link>
+              <Link to="/" className="nav-link">Home</Link>
             </li>
-
             <li className="nav-menu-item">
-              <Link to="/products" className="nav-link">
-                Products
-              </Link>
+              <Link to="/products" className="nav-link">Products</Link>
             </li>
-
+            <li className="nav-menu-item">
+              <Link to="/my-orders" className="nav-link">My Orders</Link>
+            </li>
             <li className="nav-menu-item">
               <Link to="/cart" className="nav-link">
                 Cart
                 {renderCartItemsCount()}
               </Link>
             </li>
+            {isAdmin() && (
+              <li className="nav-menu-item">
+                <Link to="/admin" className="nav-link admin-nav-link">
+                  Admin
+                </Link>
+              </li>
+            )}
           </ul>
           <button
             type="button"
@@ -92,6 +103,7 @@ const Header = props => {
           </button>
         </div>
       </div>
+
       <div className="nav-menu-mobile">
         <ul className="nav-menu-list-mobile">
           <li className="nav-menu-item-mobile">
@@ -103,7 +115,6 @@ const Header = props => {
               />
             </Link>
           </li>
-
           <li className="nav-menu-item-mobile">
             <Link to="/products" className="nav-link">
               <img
@@ -128,5 +139,6 @@ const Header = props => {
     </nav>
   )
 }
+
 const HeaderWithRouter = withRouter(Header)
 export default HeaderWithRouter

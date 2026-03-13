@@ -11,6 +11,7 @@ import AdminRoute from './components/AdminRoute'
 import AdminDashboard from './components/AdminDashboard'
 import ProtectedRoute from './components/ProtectedRoute'
 import Register from './components/Register'
+import MyOrders from './components/MyOrders'
 import CartContext from './context/CartContext'
 import {apiCall} from './utils/api'
 import './App.css'
@@ -179,6 +180,7 @@ class App extends Component {
               component={ProductItemDetails}
             />
             <ProtectedRoute exact path="/cart" component={Cart} />
+            <ProtectedRoute exact path="/my-orders" component={MyOrders} />
             <AdminRoute exact path="/admin" component={AdminDashboard} />
             <Route path="/not-found" component={NotFound} />
             <Redirect to="not-found" />
