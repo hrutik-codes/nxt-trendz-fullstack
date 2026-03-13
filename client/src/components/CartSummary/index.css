@@ -38,3 +38,14 @@
   padding: 12px 24px;
   cursor: pointer;
 }
+.checkout-error {
+  color: #ff0000;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.checkout-btn:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}

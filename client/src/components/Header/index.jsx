@@ -10,6 +10,7 @@ const Header = props => {
     const {history} = props
     Cookies.remove('jwt_token')
     history.replace('/login')
+    window.location.reload()
   }
 
   const renderCartItemsCount = () => (

@@ -45,7 +45,7 @@ class App extends Component {
   // Remove all cart items
   removeAllCartItems = async () => {
     try {
-      await apiCall('/api/cart', {method: 'DELETE'})
+      await apiCall('/api/cart/clear', {method: 'DELETE'})
       this.setState({cartList: []})
     } catch (err) {
       console.error('Failed to clear cart:', err.message)
