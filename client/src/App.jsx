@@ -7,6 +7,8 @@ import Products from './components/Products'
 import ProductItemDetails from './components/ProductItemDetails'
 import Cart from './components/Cart'
 import NotFound from './components/NotFound'
+import AdminRoute from './components/AdminRoute'
+import AdminDashboard from './components/AdminDashboard'
 import ProtectedRoute from './components/ProtectedRoute'
 import Register from './components/Register'
 import CartContext from './context/CartContext'
@@ -177,6 +179,7 @@ class App extends Component {
               component={ProductItemDetails}
             />
             <ProtectedRoute exact path="/cart" component={Cart} />
+            <AdminRoute exact path="/admin" component={AdminDashboard} />
             <Route path="/not-found" component={NotFound} />
             <Redirect to="not-found" />
           </Switch>

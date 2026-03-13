@@ -20,7 +20,7 @@ export const registerUser = async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: generateToken(user._id)
+      token: generateToken(user._id, user.isAdmin)
     })
 
   } catch (error) {
@@ -51,7 +51,7 @@ export const loginUser = async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: generateToken(user._id)
+      token: generateToken(user._id, user.isAdmin)
     })
 
   } catch (error) {

@@ -45,9 +45,6 @@ export const verifyPayment = async (req, res) => {
       .update(body)
       .digest('hex')
 
-    console.log('Expected:', expectedSignature)
-    console.log('Received:', razorpay_signature)
-
     const isValid = expectedSignature === razorpay_signature
 
     if (!isValid) {
