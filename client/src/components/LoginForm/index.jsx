@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import {Redirect, Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
-import {setToken} from '../../utils/api'
+import {setToken, apiCall} from '../../utils/api'
 import './index.css'
 
 class LoginForm extends Component {
@@ -34,19 +34,13 @@ class LoginForm extends Component {
     event.preventDefault()
     const {email, password} = this.state
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const data = await apiCall('/api/auth/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({email, password})
       })
-      const data = await response.json()
-      if (response.ok) {
-        this.onSubmitSuccess(data.token)
-      } else {
-        this.onSubmitFailure(data.message)
-      }
+      this.onSubmitSuccess(data.token)
     } catch (err) {
-      this.onSubmitFailure(err.message || 'Something went wrong. Please try again.')
+      this.onSubmitFailure(err.message || 'Failed to login')
     }
   }
 
