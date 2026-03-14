@@ -1,19 +1,35 @@
 .primedeals-list-heading {
-  color: #475569;
+  color: #1e293b;
   font-family: 'Roboto';
-  font-size: 32px;
-  font-weight: 500;
+  font-size: 28px;
+  font-weight: 700;
   margin-top: 48px;
+  margin-bottom: 24px;
 }
 
 .products-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   padding-left: 0;
+  list-style: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .products-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .products-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .register-prime-img {
   margin-top: 30px;
+  width: 100%;
 }
 
 .primedeals-loader-container {

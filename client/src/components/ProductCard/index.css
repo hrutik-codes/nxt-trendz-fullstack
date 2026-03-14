@@ -1,21 +1,20 @@
 .product-item {
   list-style-type: none;
-  margin-bottom: 24px;
-  flex: 0 1 calc(33% - 20px);
-  min-width: 200px;
-  max-width: 280px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
 }
 
-@media screen and (min-width: 768px) and (max-width: 991px) {
-  .product-item {
-    width: 220px;
-  }
+.product-item:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(9, 103, 210, 0.08);
 }
 
 @media screen and (max-width: 767px) {
   .product-item {
     width: 100%;
-    margin-right: 0px;
   }
 }
 
@@ -23,73 +22,83 @@
   display: flex;
   flex-direction: column;
   text-decoration: none;
+  padding: 16px;
+  height: 100%;
 }
 
 .thumbnail {
   width: 100%;
-  height: 250px;
+  height: 220px;
   object-fit: contain;
-  border-radius: 6px;
-  background-color: #f8f8f8;
-  padding: 10px;
+  border-radius: 10px;
+  background-color: #f8fafc;
+  padding: 12px;
+  transition: transform 0.3s ease;
+}
+
+.product-item:hover .thumbnail {
+  transform: scale(1.04);
 }
 
 .title {
-  color: #171f46;
+  color: #1e293b;
   font-family: 'Roboto';
-  font-size: 16px;
-  font-weight: 500;
-  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 14px;
   margin-bottom: 6px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
-  line-clamp: 2; 
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  line-height: 1.4;
 }
 
 .brand {
-  color: #594d6d;
+  color: #64748b;
   font-family: 'Roboto';
-  font-size: 14px;
-  margin-bottom: 6px;
+  font-size: 13px;
+  margin-bottom: 10px;
 }
 
 .product-details {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 8px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid #f1f5f9;
 }
 
 .price {
-  color: #171f46;
+  color: #0967d2;
   font-family: 'Roboto';
   font-size: 16px;
   font-weight: 700;
-  margin: 0px;
+  margin: 0;
 }
 
 .rating-container {
   display: flex;
   align-items: center;
-  background-color: #3b82f6;
-  border-radius: 6px;
-  padding: 4px 12px;
+  background: linear-gradient(135deg, #3b82f6, #0967d2);
+  border-radius: 20px;
+  padding: 4px 10px;
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
 }
 
 .rating {
   color: #ffffff;
   font-family: 'Roboto';
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
   margin-right: 4px;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .star {
-  height: 16px;
-  width: 16px;
-  margin-bottom: 2px;
+  height: 14px;
+  width: 14px;
 }

@@ -2,10 +2,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 24px;
   flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  background-color: #f8fafc;
+  z-index: 10;
+  padding: 16px 0;
+  border-bottom: 1px solid #e2e8f0;
+  margin-top: 0;
 }
-
 @media screen and (min-width: 768px) {
   .products-header {
     margin-top: 32px;

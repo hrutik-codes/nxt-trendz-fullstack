@@ -1,7 +1,6 @@
 .product-sections {
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  width: 90%;
-  max-width: 1110px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
 }
