@@ -1,18 +1,179 @@
-# React + Vite
+# NxtTrendz — Fullstack E-Commerce Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![NxtTrendz](https://assets.ccbp.in/frontend/react-js/nxt-trendz-logo-img.png)
 
-Currently, two official plugins are available:
+A full-featured e-commerce web application built with the MERN stack, featuring secure authentication, cart management, Razorpay payment integration, and an admin dashboard.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 **Live Demo:** [nxt-trendz-fullstack.vercel.app](https://nxt-trendz-fullstack.vercel.app)
+🔗 **API:** [nxt-trendz-fullstack.onrender.com](https://nxt-trendz-fullstack.onrender.com)
 
-## React Compiler
+---
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Tech Stack
 
-Note: This will impact Vite dev & build performances.
+**Frontend**
+![React](https://img.shields.io/badge/React-18-61DAFB?style=flat&logo=react)
+![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat&logo=vite)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat&logo=javascript)
 
-## Expanding the ESLint configuration
+**Backend**
+![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=flat&logo=node.js)
+![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=flat&logo=mongodb)
+![JWT](https://img.shields.io/badge/JWT-Auth-000000?style=flat&logo=jsonwebtokens)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Payments & Deployment**
+![Razorpay](https://img.shields.io/badge/Razorpay-Payment-02042B?style=flat&logo=razorpay)
+![Vercel](https://img.shields.io/badge/Vercel-Frontend-000000?style=flat&logo=vercel)
+![Render](https://img.shields.io/badge/Render-Backend-46E3B7?style=flat&logo=render)
+
+---
+
+## Features
+
+### User Features
+- 🔐 JWT-based authentication (Register/Login)
+- 🛍️ Browse products with search, filter by category & rating, sort by price
+- 📦 Product detail page with similar products
+- 🛒 Persistent cart (synced with MongoDB)
+- 💳 Razorpay payment integration (UPI, Cards, NetBanking)
+- 📋 Order history with payment and delivery status
+
+### Admin Features
+- 👑 Role-based access control (Admin/User)
+- 📊 Admin dashboard with Orders, Products, Users tabs
+- 🔄 Update order status (Processing → Shipped → Delivered)
+- ➕ Add/Delete products
+- 👥 View and delete users
+
+---
+
+## Project Structure
+```
+nxt-trendz-fullstack/
+├── client/                 # React + Vite Frontend
+│   ├── src/
+│   │   ├── components/     # 18+ React components
+│   │   ├── context/        # Cart Context
+│   │   └── utils/          # API utility with base URL
+│   └── vercel.json         # Client-side routing config
+└── server/                 # Express Backend
+    ├── controllers/        # Auth, Cart, Orders, Payment, Admin
+    ├── middleware/         # JWT protect + admin guard
+    ├── models/             # User, Cart, Order, Product
+    └── routes/             # 20+ REST API endpoints
+```
+
+---
+
+## API Endpoints
+
+### Auth
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | /api/auth/register | Register new user |
+| POST | /api/auth/login | Login user |
+| GET | /api/auth/profile | Get user profile |
+
+### Cart
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | /api/cart | Get user cart |
+| POST | /api/cart | Add item to cart |
+| PUT | /api/cart/:productId | Update quantity |
+| DELETE | /api/cart/:productId | Remove item |
+| DELETE | /api/cart/clear | Clear cart |
+
+### Orders
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | /api/orders | Place order |
+| GET | /api/orders/my | Get my orders |
+
+### Payment
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | /api/payment/create-order | Create Razorpay order |
+| POST | /api/payment/verify | Verify payment signature |
+
+---
+
+## Local Setup
+
+### Prerequisites
+- Node.js 18+
+- MongoDB Atlas account
+- Razorpay test account
+
+### Installation
+```bash
+# Clone the repo
+git clone https://github.com/hrutik-codes/nxt-trendz-fullstack.git
+cd nxt-trendz-fullstack
+
+# Install dependencies
+npm install
+cd client && npm install
+cd ../server && npm install
+```
+
+### Environment Variables
+
+Create `server/.env`:
+```
+PORT=5000
+MONGO_URI=your_mongodb_atlas_uri
+JWT_SECRET=your_jwt_secret
+RAZORPAY_KEY_ID=rzp_test_your_key
+RAZORPAY_KEY_SECRET=your_razorpay_secret
+CLIENT_URL=http://localhost:5173
+NODE_ENV=development
+```
+
+Create `client/.env`:
+```
+VITE_API_URL=http://localhost:5000
+```
+
+### Run Development Server
+```bash
+# From root directory
+npm run dev
+```
+
+Runs both frontend (port 5173) and backend (port 5000) concurrently.
+
+---
+
+## Test Credentials
+```
+Admin Account:
+Email:    hrutik@test.com
+Password: 123456
+
+Test Payment (Razorpay):
+UPI ID: success@razorpay
+```
+
+---
+
+## Deployment
+
+| Service | Platform | URL |
+|---------|----------|-----|
+| Frontend | Vercel | nxt-trendz-fullstack.vercel.app |
+| Backend | Render | nxt-trendz-fullstack.onrender.com |
+| Database | MongoDB Atlas | Cloud hosted |
+
+> ⚠️ Render free tier spins down after 15 min inactivity. First request may take ~30 seconds.
+
+---
+
+## Author
+
+**Hrutik Jagdale**
+- GitHub: [@hrutik-codes](https://github.com/hrutik-codes)
+
+---
+
+## License
+MIT © 2026 Hrutik Jagdale
